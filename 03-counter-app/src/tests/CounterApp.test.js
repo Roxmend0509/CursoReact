@@ -14,10 +14,13 @@ describe('Pruebas en <CounterApp />',()=>{
 
 //         expect(getByText(saludo)).toBeInTheDocument();
 //     })
+    let wrapper = shallow(<CounterApp />) ;
+
+    beforeEach(()=>{
+        wrapper = shallow(<CounterApp />);
+    })
 
     test('debe mostrar <CounterApp /> correctamente', () => { 
-        const value = 10;
-        const wrapper = shallow(<CounterApp value={ value }/>);
         expect(wrapper).toMatchSnapshot();
     })
 
@@ -26,6 +29,33 @@ describe('Pruebas en <CounterApp />',()=>{
         const txtH2 = wrapper.find('h2').text().trim();
 
         expect(txtH2).toBe('100');
+    })
+
+    test('debe de incrementar con el boton +1', () => { 
+        wrapper.find('button').at(0).simulate('click');
+        const txtH2 = wrapper.find('h2').text().trim();
+
+        expect(txtH2).toBe('11');
+    })
+
+    test('debe de decrementar con el boton -1', () => { 
+        wrapper.find('button').at(2).simulate('click');
+        const txtH2 = wrapper.find('h2').text().trim();
+
+        expect(txtH2).toBe('9');
+    })
+
+    test('debe de resetear con el boton Reset', () => { 
+
+        const wrapper = shallow(<CounterApp value={ 105 } />);
+        wrapper.find('button').at(0).simulate('click');
+        wrapper.find('button').at(0).simulate('click');
+        wrapper.find('button').at(1).simulate('click');
+        const txtH2 = wrapper.find('h2').text().trim();
+
+        console.log(txtH2)
+
+        expect(txtH2).toBe('105');
     })
 
     })
