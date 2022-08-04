@@ -7,7 +7,6 @@ export const CounterApp = ( { value } ) => {
 
     const handleAdd = () => { setCounter( counter + 1); }
     const handleSubtract = () => { setCounter( counter - 1); }
-
     const handleReset = () => { setCounter( value ); }
 
     return (
@@ -17,7 +16,7 @@ export const CounterApp = ( { value } ) => {
 
             <button onClick={ handleSubtract }>-1</button>
             <button onClick={ handleAdd }>+1</button>
-            <button onClick={ handleReset }>Reset</button>
+            <button data-testid="btn-reset" onClick={ handleReset }>Reset</button>
         </>
     );
 }
